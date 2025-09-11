@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Veriscope — Auditable Early Warnings for Representation Drift</title>
+  <meta name="description" content="Veriscope is an auditor-grade early-warning system for hidden representation drift in ML models, with reproducible detectors, sequential control, and tamper-evident logs." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Veriscope — Auditable Early Warnings for Representation Drift" />
+  <meta property="og:description" content="Early-warning detectors for hidden collapse: streaming geometry + fragility, preregistered thresholds, deterministic replay." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/veriscope-site/" />
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/veriscope-site/cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#9ca3af; --acc:#60a5fa; --line:#1f2937;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      color:var(--ink); background:radial-gradient(1200px 800px at 20% -10%, #172554 0%, #0b1020 60%, #0b1020 100%) fixed;
+    }
+    header{padding:56px 24px 24px; text-align:center; border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);}
+    h1{margin:0 0 8px; font-size: clamp(28px, 4vw, 40px); letter-spacing:.2px}
+    .tag{display:inline-block; padding:4px 10px; font-size:12px; border:1px solid var(--line); border-radius:999px; color:var(--muted)}
+    main{max-width:960px; margin:24px auto; padding:0 20px 64px}
+    section{background:rgba(15,23,42,.6); border:1px solid var(--line); border-radius:16px; padding:20px; margin:16px 0; backdrop-filter: blur(6px)}
+    h2{margin:0 0 6px; font-size: clamp(20px, 2.6vw, 26px)}
+    p{margin:8px 0 0}
+    ul{margin:8px 0 0 20px}
+    a{color:var(--acc); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .grid{display:grid; gap:16px}
+    @media(min-width:880px){ .grid{grid-template-columns:1fr 1fr} }
+    footer{max-width:960px; margin:24px auto 56px; padding:0 20px; color:var(--muted); text-align:center}
+    code{background:#0b1226; padding:2px 6px; border-radius:6px; border:1px solid var(--line)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="tag">Open research prototype</div>
+    <h1>Veriscope</h1>
+    <p>Auditable early warnings for hidden <em>representation drift</em> in ML systems.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>What it is</h2>
+      <p><strong>Veriscope</strong> detects narrowings in internal representation structure that precede brittle behavior—while external metrics still look fine. Two independent channels
+      (streaming geometry + fragility) feed a preregistered sequential test; all decisions are logged for deterministic, third-party replay.</p>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Features</h2>
+        <ul>
+          <li>📉 Representation-drift signals (effective rank, spectral entropy, subspace stability)</li>
+          <li>🧪 Reproducible CV backbone (CIFAR-10) with ≤5% run-level FAR</li>
+          <li>🔒 Audit-ready logs (hash→Merkle→timestamp); deterministic verifier</li>
+          <li>⚡ Low overhead: typical step-time +2–8%</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Roadmap</h2>
+        <ul>
+          <li>LM extension: sentinels on residual streams; black-box paraphrase consistency</li>
+          <li>Collapse Zoo v1: standard pathologies/confounds; matched-FAR evaluation</li>
+          <li>Verifier CLI + containers; HF/Lightning callbacks; MLflow/W&B logger</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Docs & Papers</h2>
+        <ul>
+          <li><a href="https://works.hcommons.org/records/yeqb5-exa68" target="_blank" rel="noopener">Finite Realism (preprint)</a></li>
+          <li><a href="#" onclick="return false;">Compression–Control criterion (memo; on request)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Status</h2>
+        <p>Prototype code is private while we finish audits and packaging. Interested evaluators and research partners can request access.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Contact</h2>
+        <p><strong>Craig Holmander</strong><br>
+        <a href="mailto:craig.holm@protonmail.com">craig.holm@protonmail.com</a><br>
+        <a href="https://orcid.org/" target="_blank" rel="noopener">ORCID</a></p>
+      </div>
+      <div>
+        <h2>License</h2>
+        <p>Code: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> (planned public release).<br>
+        Site content © <span id="y"></span> Craig Holmander.</p>
+        <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Veriscope is safety research infrastructure. Signals are for investigation, not automatic suppression.</small>
+  </footer>
+</body>
+</html>
