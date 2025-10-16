@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Veriscope — Auditable Early Warnings for Representation Drift</title>
   <meta name="description" content="Veriscope is an auditor-grade early-warning system for hidden representation drift in ML models, with reproducible detectors, sequential control, and tamper-evident logs." />
   <meta name="theme-color" content="#0f172a" />
@@ -11,101 +11,193 @@
   <meta property="og:title" content="Veriscope — Auditable Early Warnings for Representation Drift" />
   <meta property="og:description" content="Early-warning detectors for hidden collapse: streaming geometry + fragility, preregistered thresholds, deterministic replay." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://YOUR-USERNAME.github.io/veriscope-site/" />
-  <meta property="og:image" content="https://YOUR-USERNAME.github.io/veriscope-site/cover.png" />
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/YOUR-REPO/" />
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/cover.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
     :root{
-      --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#9ca3af; --acc:#60a5fa; --line:#1f2937;
+      --bg:#0b1020; --card:#0f172a; --ink:#e5e7eb; --muted:#9ca3af; --acc:#60a5fa; --line:#1f2937; --ok:#34d399; --warn:#fbbf24;
     }
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
-      color:var(--ink); background:radial-gradient(1200px 800px at 20% -10%, #172554 0%, #0b1020 60%, #0b1020 100%) fixed;
+      margin:0; font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;
+      color:var(--ink);
+      background:radial-gradient(1200px 800px at 20% -10%, #172554 0%, #0b1020 60%, #0b1020 100%) fixed;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
-    header{padding:56px 24px 24px; text-align:center; border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);}
-    h1{margin:0 0 8px; font-size: clamp(28px, 4vw, 40px); letter-spacing:.2px}
+    header{
+      padding:60px 24px 28px; text-align:center; border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+    }
     .tag{display:inline-block; padding:4px 10px; font-size:12px; border:1px solid var(--line); border-radius:999px; color:var(--muted)}
-    main{max-width:960px; margin:24px auto; padding:0 20px 64px}
-    section{background:rgba(15,23,42,.6); border:1px solid var(--line); border-radius:16px; padding:20px; margin:16px 0; backdrop-filter: blur(6px)}
-    h2{margin:0 0 6px; font-size: clamp(20px, 2.6vw, 26px)}
+    h1{margin:10px 0 6px; font-size:clamp(28px,4vw,42px); letter-spacing:.2px}
+    .lead{margin:0 auto; max-width:900px; color:#cbd5e1}
+    main{max-width:1040px; margin:28px auto; padding:0 20px 80px}
+    section{background:rgba(15,23,42,.6); border:1px solid var(--line); border-radius:16px; padding:24px; margin:16px 0; backdrop-filter:blur(6px)}
+    h2{margin:0 0 8px; font-size:clamp(20px,2.6vw,26px)}
     p{margin:8px 0 0}
-    ul{margin:8px 0 0 20px}
+    ul{margin:10px 0 0 20px}
     a{color:var(--acc); text-decoration:none}
     a:hover{text-decoration:underline}
     .grid{display:grid; gap:16px}
-    @media(min-width:880px){ .grid{grid-template-columns:1fr 1fr} }
-    footer{max-width:960px; margin:24px auto 56px; padding:0 20px; color:var(--muted); text-align:center}
-    code{background:#0b1226; padding:2px 6px; border-radius:6px; border:1px solid var(--line)}
+    @media (min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+    .buttons{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
+      border:1px solid var(--line); background:rgba(255,255,255,0.03); color:var(--ink); text-decoration:none;
+    }
+    .btn:hover{background:rgba(255,255,255,0.06)}
+    code, pre code{
+      background:#0b1226; color:#e5e7eb; border:1px solid #0f1a35; border-radius:8px; padding:2px 6px
+    }
+    pre{background:#0b1226; border:1px solid #0f1a35; border-radius:12px; padding:14px; overflow:auto}
+    .kpi{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .pill{font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+    footer{max-width:1040px; margin:24px auto 60px; padding:0 20px; color:var(--muted); text-align:center}
+    .small{font-size:12px}
   </style>
 </head>
 <body>
-  <header>
-    <div class="tag">Open research prototype</div>
+  <header role="banner">
+    <div class="tag" aria-label="project state">Open research prototype</div>
     <h1>Veriscope</h1>
-    <p>Auditable early warnings for hidden <em>representation drift</em> in ML systems.</p>
+    <p class="lead">Auditable early warnings for hidden <em>representation drift</em> in ML systems.</p>
+    <div class="buttons" role="navigation" aria-label="primary">
+      <a class="btn" href="https://github.com/YOUR-USERNAME/YOUR-REPO" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://github.com/YOUR-USERNAME/YOUR-REPO#readme" target="_blank" rel="noopener">README / Docs</a>
+      <a class="btn" href="https://doi.org/10.5281/zenodo.17226485" target="_blank" rel="noopener">Finite Realism (Zenodo)</a>
+    </div>
+    <div class="kpi" aria-label="status">
+      <span class="pill" title="package">CLI: <strong>veriscope</strong></span>
+      <span class="pill" title="version">Version: <strong>v0.1.0</strong></span>
+      <span class="pill" title="status-roadmap">CIFAR-10 suite ✅ • LM extension 🔜</span>
+    </div>
   </header>
 
-  <main>
+  <main role="main">
     <section>
       <h2>What it is</h2>
-      <p><strong>Veriscope</strong> detects narrowings in internal representation structure that precede brittle behavior—while external metrics still look fine. Two independent channels
-      (streaming geometry + fragility) feed a preregistered sequential test; all decisions are logged for deterministic, third-party replay.</p>
+      <p><strong>Veriscope</strong> detects narrowing in internal representation structure that precedes brittle behavior—while external metrics still look fine.
+      Two independent channels (streaming geometry + fragility) feed a preregistered sequential test; all decisions are logged for deterministic, third-party replay.</p>
     </section>
 
     <section class="grid">
       <div>
         <h2>Features</h2>
         <ul>
-          <li>📉 Representation-drift signals (effective rank, spectral entropy, subspace stability)</li>
-          <li>🧪 Reproducible CV backbone (CIFAR-10) with ≤5% run-level FAR</li>
-          <li>🔒 Audit-ready logs (hash→Merkle→timestamp); deterministic verifier</li>
-          <li>⚡ Low overhead: typical step-time +2–8%</li>
+          <li>📉 Representation-drift signals (effective rank, variance-outside-k, FTLE-like dynamics)</li>
+          <li>🧭 Finite-Realism gate (product-TV + prequential gain, ε<sub>stat</sub>, κ<sub>sens</sub>)</li>
+          <li>🧪 Calibratable GT (unsupervised): rank-only soft collapse; robust hard-collapse cutoffs</li>
+          <li>🤝 Learned detector with deployable gate (FP-calibrated τ→τ′)</li>
+          <li>🔒 Audit-ready: environment capsules, window provenance, overlay files</li>
+          <li>🔁 Determinism: seeds, cuBLAS config, safe data-loading, JL cache</li>
         </ul>
       </div>
       <div>
-        <h2>Roadmap</h2>
-        <ul>
-          <li>LM extension: sentinels on residual streams; black-box paraphrase consistency</li>
-          <li>Collapse Zoo v1: standard pathologies/confounds; matched-FAR evaluation</li>
-          <li>Verifier CLI + containers; HF/Lightning callbacks; MLflow/W&B logger</li>
-        </ul>
+        <h2>Install (dev)</h2>
+        <pre aria-label="install instructions"><code>python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+# Install PyTorch for your platform:
+# CPU  : pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# CUDA : pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121</code></pre>
+        <p class="small">Optional extras: <code>ripser</code> for H0 persistence; <code>pyarrow</code>/<code>fastparquet</code> for Parquet.</p>
       </div>
     </section>
 
     <section class="grid">
+      <div>
+        <h2>Quick start</h2>
+        <p><strong>CLI help / version</strong> (fast, no heavy imports):</p>
+        <pre><code>veriscope --help
+veriscope --version</code></pre>
+
+        <p><strong>Smoke run</strong> (fast end-to-end):</p>
+        <pre><code>export SCAR_SMOKE=1
+export SCAR_OUTDIR=./out_scar_smoke
+export SCAR_DATA=./data
+veriscope</code></pre>
+
+        <p><strong>Full sweep</strong> (more seeds/epochs):</p>
+        <pre><code>unset SCAR_SMOKE
+export SCAR_OUTDIR=./out_scar_full
+export SCAR_DATA=./data
+veriscope</code></pre>
+      </div>
+
+      <div>
+        <h2>Config knobs</h2>
+        <ul>
+          <li><code>SCAR_OUTDIR</code> — artifact root</li>
+          <li><code>SCAR_DATA</code> — dataset root (CIFAR-10 / STL-10)</li>
+          <li><code>SCAR_SMOKE=1</code> — tiny budgets; at least one heavy pass</li>
+          <li><code>SCAR_EVAL_SPLIT</code> — <code>eval</code> | <code>calib</code> | <code>both</code></li>
+          <li><code>SCAR_NUM_WORKERS</code> — DataLoader workers (recommend <code>0</code> for determinism)</li>
+          <li>Gate: <code>SCAR_FAMILY_Z_THR</code>, <code>SCAR_WARN_CONSEC</code>, <code>SCAR_FAMILY_WINDOW</code></li>
+          <li>Soft-GT: <code>SCAR_FIXED_GT_RANK_MIN</code>, <code>SCAR_SOFT_Q</code></li>
+        </ul>
+        <p class="small">Determinism: sets <code>CUBLAS_WORKSPACE_CONFIG</code> if unset; JL projections use a bounded, seeded cache.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div>
+        <h2>Outputs & artifacts</h2>
+        <ul>
+          <li><strong>Run logs</strong>: <code>bundle_runs_{tag}.parquet</code> (+ CSV fallback), errors log</li>
+          <li><strong>Detector / calibration</strong>: <code>learned_detector_*.json</code>, <code>tau_mapping_*.json</code>, PH/JL adequacy</li>
+          <li><strong>Baselines & GT</strong>: robust gradient cutoffs, baseline event CSVs</li>
+          <li><strong>Overlays & summaries</strong>: overlay Parquet, summary CSVs</li>
+          <li><strong>Provenance</strong>: <code>env.json</code>, <code>repro.json</code>, <code>pip_freeze.txt</code>, window provenance</li>
+        </ul>
+        <p class="small">Writes are atomic where possible; Parquet ➜ CSV fallback is automatic.</p>
+      </div>
       <div>
         <h2>Docs & Papers</h2>
         <ul>
-          <li><a href="https://works.hcommons.org/records/yeqb5-exa68" target="_blank" rel="noopener">Finite Realism (preprint)</a></li>
-          <li><a href="#" onclick="return false;">Compression–Control criterion (memo; on request)</a></li>
+          <li><a href="https://github.com/YOUR-USERNAME/YOUR-REPO#readme" target="_blank" rel="noopener">Project README</a></li>
+          <li><a href="https://doi.org/10.5281/zenodo.17226485" target="_blank" rel="noopener">Finite Realism — main paper (Zenodo)</a></li>
+          <!-- Add more FR papers or notebooks as they publish -->
         </ul>
-      </div>
-      <div>
-        <h2>Status</h2>
-        <p>Prototype code is private while we finish audits and packaging. Interested evaluators and research partners can request access.</p>
       </div>
     </section>
 
     <section class="grid">
       <div>
-        <h2>Contact</h2>
-        <p><strong>Craig Holmander</strong><br>
-        <a href="mailto:craig.holm@protonmail.com">craig.holm@protonmail.com</a><br>
-        <a href="https://orcid.org/0009-0002-3145-8498" target="_blank" rel="noopener">ORCID</a></p>
+        <h2>Status</h2>
+        <p>Package <strong>v0.1.0</strong> is live with a working CLI and CIFAR-10 suite. LM extensions and verifier tooling are in progress.</p>
       </div>
       <div>
         <h2>License</h2>
-        <p>Code: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> (planned public release).<br>
-        Site content © <span id="y"></span> Craig Holmander.</p>
-        <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+        <p>Code is dual-licensed:</p>
+        <ul>
+          <li>AGPL-3.0-only (free/open use under AGPL terms)</li>
+          <li>Commercial license (for organizations preferring non-copyleft terms)</li>
+        </ul>
+        <p>See the repository <a href="https://github.com/YOUR-USERNAME/YOUR-REPO/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p><strong>Craig Holmander</strong><br>
+        <a href="mailto:craig.holm@protonmail.com">craig.holm@protonmail.com</a> ·
+        <a href="https://orcid.org/0009-0002-3145-8498" target="_blank" rel="noopener">ORCID</a> ·
+        <a href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
+      </p>
+      <p class="small">Veriscope is safety research infrastructure. Signals are for investigation, not automatic suppression.</p>
     </section>
   </main>
 
   <footer>
-    <small>Veriscope is safety research infrastructure. Signals are for investigation, not automatic suppression.</small>
+    <small>© <span id="y"></span> Craig Holmander.</small>
   </footer>
+
+  <script>
+    // Year stamp
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
